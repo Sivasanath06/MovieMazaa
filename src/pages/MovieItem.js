@@ -43,10 +43,13 @@ export const MovieItem = () => {
       </div>
 
       <p className="my-4">
-        <span className="mr-2 font-bold">Runtime:</span>
-        <span>{movie.runtime} min.</span>
+        <span className="mr-2 font-bold">Original Language:</span>
+        <span>{movie.original_language} min.</span>
       </p>
-
+      <p className="my-4">
+        <span className="mr-2 font-bold">Budget:</span>
+        <span>{movie.budget}</span>
+      </p>
       <p className="my-4">
         <span className="mr-2 font-bold">Budget:</span>
         <span>{movie.budget}</span>
