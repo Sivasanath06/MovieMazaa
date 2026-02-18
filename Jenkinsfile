@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "yt-wrapper-app"
+        CONTAINER_NAME = "yt-wrapper-container"
+        PORT = "8080"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/Sivasanath06/MovieMazaa.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME .'
+            }
+        }
+
+        stage('Stop Old Container') {
+            steps {
+                sh '''
+                docker stop $CONTAINER_NAME || true
+                docker rm $CONTAINER_NAME || true
+                '''
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                sh 'docker run -d -p $PORT:80 --name $CONTAINER_NAME $IMAGE_NAME'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "🚀 Deployment Successful"
+        }
+        failure {
+            echo "❌ Deployment Failed"
+        }
+    }
+}
