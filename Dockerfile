@@ -1,5 +1,5 @@
 # ---------- Stage 1: Build ----------
-FROM --platform=linux/amd64 node:18-alpine AS builder
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN npm run build
 
 
 # ---------- Stage 2: Production ----------
-FROM --platform=linux/amd64 nginx:alpine
+FROM nginx:alpine
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
