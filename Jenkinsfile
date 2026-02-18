@@ -4,7 +4,7 @@ pipeline {
     environment {
         IMAGE_NAME = "yt-wrapper-app"
         CONTAINER_NAME = "yt-wrapper-container"
-        PORT = "8080"
+        PORT = "9090"
     }
 
     stages {
